@@ -19,6 +19,6 @@ public class FoodItem {
     public String getCategory() { return category; }
 
     public String toString() {
-        return id + ". " + name + " (" + category + ") - ₹" + price;
+        return id + ". " + name + " (" + category + ") : " + price + " Rs";
     }
 }

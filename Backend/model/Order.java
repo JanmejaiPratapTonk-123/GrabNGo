@@ -35,7 +35,7 @@ public class Order {
         for (FoodItem f : cart) {
             System.out.println("- " + f.getName());
         }
-        System.out.println("Total: ₹" + total);
+        System.out.println("Total: " + total + " Rs");
     }
 
     public int getToken() { return token; }
@@ -59,7 +59,7 @@ public class Order {
         }
 
         System.out.println("Payment: " + paymentMode);
-        System.out.println("Total: ₹" + total);
+        System.out.println("Total: " + total + " Rs");
         System.out.println("Status: " + status);
     }
 }

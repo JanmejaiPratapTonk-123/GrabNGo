@@ -8,6 +8,6 @@ public class SalesService {
     }
 
     public void showSales() {
-        System.out.println("Total Sales: ₹" + totalSales);
+        System.out.println("Total Sales: " + totalSales + " Rs");
     }
 }
