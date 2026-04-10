@@ -40,6 +40,8 @@ public class Order {
 
     public int getToken() { return token; }
     public double getTotal() { return total; }
+    public ArrayList<FoodItem> getCart() { return cart; }
+    public String getStatus() { return status; }
 
     public void setPaymentMode(String mode) {
         this.paymentMode = mode;
