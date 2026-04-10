@@ -1,8 +1,9 @@
 --- ORDER ---
 Token: 1
-Name: nandini
+Name: Avika
 Items:
-Payment: UPI
-Total: 0.0 Rs
+- Burger
+Payment: Cash
+Total: 50.0 Rs
 Status: Cart
 

@@ -54,25 +54,22 @@ public class Main
                 String paymentMode = PaymentService.process(pay);
                 order.setPaymentMode(paymentMode);
 
-                if (paymentMode.equals("UPI")) {
-                    System.out.println("Please scan the QR code to complete payment.");
-                    // Save order details to file
-                    try {
-                        FileWriter fw = new FileWriter("orders.txt", true);
-                        fw.write("--- ORDER ---\n");
-                        fw.write("Token: " + order.getToken() + "\n");
-                        fw.write("Name: " + name + "\n");
-                        fw.write("Items:\n");
-                        for (FoodItem f : order.getCart()) {
-                            fw.write("- " + f.getName() + "\n");
-                        }
-                        fw.write("Payment: " + paymentMode + "\n");
-                        fw.write("Total: " + order.getTotal() + " Rs\n");
-                        fw.write("Status: " + order.getStatus() + "\n\n");
-                        fw.close();
-                    } catch (IOException e) {
-                        System.out.println("Error saving order details.");
+                // Save order details to file
+                try {
+                    FileWriter fw = new FileWriter("orders.txt", true);
+                    fw.write("--- ORDER ---\n");
+                    fw.write("Token: " + order.getToken() + "\n");
+                    fw.write("Name: " + name + "\n");
+                    fw.write("Items:\n");
+                    for (FoodItem f : order.getCart()) {
+                        fw.write("- " + f.getName() + "\n");
                     }
+                    fw.write("Payment: " + paymentMode + "\n");
+                    fw.write("Total: " + order.getTotal() + " Rs\n");
+                    fw.write("Status: " + order.getStatus() + "\n\n");
+                    fw.close();
+                } catch (IOException e) {
+                    System.out.println("Error saving order details.");
                 }
 
                 system.placeOrder(order);
