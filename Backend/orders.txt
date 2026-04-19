@@ -7,3 +7,20 @@ Payment: Cash
 Total: 50.0 Rs
 Status: Cart
 
+--- ORDER ---
+Token: 1
+Name: k
+Items:
+- Burger
+Payment: Cash
+Total: 50.0 Rs
+Status: Cart
+
+--- ORDER ---
+Token: 1
+Name: nandini
+Items:
+Payment: Cash
+Total: 0.0 Rs
+Status: Cart
+
