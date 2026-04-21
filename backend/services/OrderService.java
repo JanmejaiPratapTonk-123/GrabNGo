@@ -10,19 +10,20 @@ import java.util.Collection;
  */
 public class OrderService {
 
-    // Start from last 4 digits of epoch seconds so tokens never repeat across sessions
-    private int tokenCounter = (int) (System.currentTimeMillis() / 1000 % 9000) + 1000;
+    private int tokenCounter;
+
+    /**
+     * @param startToken the first token to issue (read from persistent storage)
+     */
+    public OrderService(int startToken) {
+        this.tokenCounter = startToken;
+    }
 
     /**
      * Creates a new order from the current cart contents.
-     *
-     * @param cartItems     the items being ordered
-     * @param total         the order total
-     * @param paymentMethod "Cash" or "UPI"
-     * @return the newly created Order with a unique token
      */
     public Order createOrder(Collection<CartItem> cartItems, double total, String paymentMethod) {
-        int token = tokenCounter++;
-        return new Order(token, cartItems, total, paymentMethod);
+        return new Order(tokenCounter++, cartItems, total, paymentMethod);
     }
 }
+

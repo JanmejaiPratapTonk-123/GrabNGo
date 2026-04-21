@@ -32,11 +32,11 @@ public class KioskController {
     public KioskController() {
         this.menuService = new MenuService();
         this.cartService = new CartService();
-        this.orderService = new OrderService();
+        this.orderDAO = new OrderFileDAO();
+        this.orderService = new OrderService(orderDAO.getNextToken()); // continues from last saved token
         this.paymentService = new PaymentService();
         this.salesService = new SalesService();
         this.historyService = new HistoryService();
-        this.orderDAO = new OrderFileDAO();
     }
 
     // --- Menu Operations ---

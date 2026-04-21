@@ -38,22 +38,45 @@ public class OrderFileDAO {
             fw.write("Total: ₹" + (int) order.getTotal() + "\n");
             fw.write("Status: " + order.getStatus() + "\n\n");
         } catch (IOException e) {
-            System.err.println("Error saving order details to file: " + e.getMessage());
-            e.printStackTrace();
+            System.err.println("Error saving order: " + e.getMessage());
         }
     }
 
     /**
-     * Reads all orders from orders.txt and parses them into OrderRecord objects.
-     * Returns newest-first. Handles missing file and malformed entries gracefully.
+     * Scans orders.txt for the highest token and returns max + 1.
+     * Returns 1 if no orders exist yet — so tokens always start from 1.
+     */
+    public int getNextToken() {
+        File file = new File(FILE_PATH);
+        if (!file.exists() || file.length() == 0) return 1;
+
+        int maxToken = 0;
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                line = line.trim();
+                if (line.startsWith("Token: ")) {
+                    try {
+                        int t = Integer.parseInt(line.substring(7).trim());
+                        if (t > maxToken) maxToken = t;
+                    } catch (NumberFormatException ignored) {}
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Could not read token counter: " + e.getMessage());
+        }
+        return maxToken + 1;
+    }
+
+    /**
+     * Reads all orders from orders.txt and returns them as OrderRecord objects.
+     * Returns newest-first. Handles missing/malformed file gracefully.
      */
     public List<OrderRecord> loadOrders() {
         List<OrderRecord> records = new ArrayList<>();
         File file = new File(FILE_PATH);
 
-        if (!file.exists() || file.length() == 0) {
-            return records;
-        }
+        if (!file.exists() || file.length() == 0) return records;
 
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line;
@@ -72,25 +95,16 @@ public class OrderFileDAO {
                 if (line.isEmpty()) continue;
 
                 if (line.equals("--- ORDER ---")) {
-                    // Save previous order if exists
                     if (inOrder) {
                         records.add(new OrderRecord(token, dateTime,
                                 items.toString().trim(), itemCount, total, payment, status));
                     }
-                    // Reset for new order
-                    token = 0;
-                    dateTime = "";
-                    items = new StringBuilder();
-                    itemCount = 0;
-                    total = 0;
-                    payment = "";
-                    status = "";
-                    inOrder = true;
-                    inItems = false;
+                    token = 0; dateTime = ""; items = new StringBuilder();
+                    itemCount = 0; total = 0; payment = ""; status = "";
+                    inOrder = true; inItems = false;
                 } else if (line.startsWith("Token: ")) {
-                    try {
-                        token = Integer.parseInt(line.substring(7).trim());
-                    } catch (NumberFormatException ignored) {}
+                    try { token = Integer.parseInt(line.substring(7).trim()); }
+                    catch (NumberFormatException ignored) {}
                     inItems = false;
                 } else if (line.startsWith("Date: ")) {
                     dateTime = line.substring(6).trim();
@@ -100,17 +114,13 @@ public class OrderFileDAO {
                 } else if (line.startsWith("- ") && inItems) {
                     itemCount++;
                     if (items.length() > 0) items.append(", ");
-                    // Extract just the name from "- Burger x3 (₹240)"
-                    String entry = line.substring(2).trim();
-                    items.append(entry);
+                    items.append(line.substring(2).trim());
                 } else if (line.startsWith("Payment: ")) {
                     payment = line.substring(9).trim();
                     inItems = false;
                 } else if (line.startsWith("Total: ")) {
-                    String val = line.substring(7).trim().replace("₹", "").replace(",", "");
-                    try {
-                        total = Integer.parseInt(val);
-                    } catch (NumberFormatException ignored) {}
+                    try { total = Integer.parseInt(line.substring(7).trim().replace("₹", "").replace(",", "")); }
+                    catch (NumberFormatException ignored) {}
                     inItems = false;
                 } else if (line.startsWith("Status: ")) {
                     status = line.substring(8).trim();
@@ -118,7 +128,6 @@ public class OrderFileDAO {
                 }
             }
 
-            // Don't forget the last order in the file
             if (inOrder) {
                 records.add(new OrderRecord(token, dateTime,
                         items.toString().trim(), itemCount, total, payment, status));
@@ -128,9 +137,7 @@ public class OrderFileDAO {
             System.err.println("Error reading order history: " + e.getMessage());
         }
 
-        // Newest first
-        Collections.reverse(records);
+        Collections.reverse(records); // Newest first
         return records;
     }
 }
-

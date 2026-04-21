@@ -65,8 +65,8 @@ public class OrderHistoryDialog extends JDialog {
         JPanel root = new JPanel(new BorderLayout(0, 0));
         root.setBackground(AppTheme.MC_WHITE);
 
-        // ── Header ───────────────────────────────────────────────────────────────
-        JPanel header = new JPanel(new BorderLayout(12, 0));
+        // ── Header (red title bar only) ───────────────────────────────────────────
+        JPanel header = new JPanel(new BorderLayout());
         header.setBackground(AppTheme.MC_RED);
         header.setBorder(new EmptyBorder(14, 20, 14, 20));
 
@@ -75,24 +75,26 @@ public class OrderHistoryDialog extends JDialog {
         title.setForeground(AppTheme.MC_WHITE);
         header.add(title, BorderLayout.WEST);
 
-        // Search field
-        JPanel searchPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 8, 0));
-        searchPanel.setOpaque(false);
-
-        JLabel searchIcon = new JLabel("🔍");
-        searchIcon.setFont(AppTheme.getFontPlain(16));
-        searchPanel.add(searchIcon);
-
-        JTextField searchField = new JTextField(14);
-        searchField.setFont(AppTheme.getFontPlain(13));
-        searchField.setBorder(BorderFactory.createCompoundBorder(
-            BorderFactory.createLineBorder(new Color(255, 255, 255, 80), 1),
-            new EmptyBorder(6, 10, 6, 10)
+        // ── Search toolbar (clean white row below header) ─────────────────────────
+        JPanel toolbar = new JPanel(new BorderLayout(0, 0));
+        toolbar.setBackground(AppTheme.MC_WHITE);
+        toolbar.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createMatteBorder(0, 0, 1, 0, AppTheme.BORDER),
+            new EmptyBorder(10, 20, 10, 20)
         ));
-        searchField.setBackground(new Color(255, 255, 255, 30));
-        searchField.setForeground(AppTheme.MC_WHITE);
-        searchField.setCaretColor(AppTheme.MC_WHITE);
-        searchField.putClientProperty("JTextField.placeholderText", "Search by Token...");
+
+        JLabel searchLbl = new JLabel("Search by Token:");
+        searchLbl.setFont(AppTheme.getFontPlain(13));
+        searchLbl.setForeground(AppTheme.TEXT_MUTED);
+
+        JTextField searchField = new JTextField(16);
+        searchField.setFont(AppTheme.getFontPlain(13));
+        searchField.setForeground(AppTheme.TEXT_DARK);
+        searchField.setBackground(AppTheme.MC_WHITE);
+        searchField.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(AppTheme.BORDER, 1),
+            new EmptyBorder(5, 10, 5, 10)
+        ));
 
         // Live search filtering
         searchField.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
@@ -101,9 +103,17 @@ public class OrderHistoryDialog extends JDialog {
             @Override public void changedUpdate(javax.swing.event.DocumentEvent e) { applyFilter(searchField.getText()); }
         });
 
-        searchPanel.add(searchField);
-        header.add(searchPanel, BorderLayout.EAST);
-        root.add(header, BorderLayout.NORTH);
+        JPanel searchRow = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0));
+        searchRow.setOpaque(false);
+        searchRow.add(searchLbl);
+        searchRow.add(searchField);
+        toolbar.add(searchRow, BorderLayout.WEST);
+
+        // Stack header + toolbar into NORTH
+        JPanel north = new JPanel(new BorderLayout());
+        north.add(header, BorderLayout.NORTH);
+        north.add(toolbar, BorderLayout.SOUTH);
+        root.add(north, BorderLayout.NORTH);
 
         // ── Table ────────────────────────────────────────────────────────────────
         tableModel = new DefaultTableModel(COLUMNS, 0) {
