@@ -1,0 +1,23 @@
+# ── Compiled output (NEVER commit these) ──────────────────────────────────────
+out/
+bin/
+build/
+*.class
+
+# ── IDE / editor project files ────────────────────────────────────────────────
+.vscode/
+.idea/
+*.iml
+*.iws
+*.ipr
+.project
+.classpath
+.settings/
+
+# ── OS-generated files ────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+
+# ── Runtime artifacts ─────────────────────────────────────────────────────────
+orders.txt
+sources.txt
