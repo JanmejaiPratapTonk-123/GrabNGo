@@ -4,6 +4,7 @@ import backend.dao.OrderFileDAO;
 import backend.models.CartItem;
 import backend.models.MenuItem;
 import backend.models.Order;
+import backend.models.OrderRecord;
 import backend.services.CartService;
 import backend.services.HistoryService;
 import backend.services.MenuService;
@@ -119,5 +120,13 @@ public class KioskController {
 
     public List<Order> getOrderHistory() {
         return historyService.getHistory();
+    }
+
+    /**
+     * Loads complete order history from the persistent orders.txt file.
+     * Returns newest-first.
+     */
+    public List<OrderRecord> loadOrderHistory() {
+        return orderDAO.loadOrders();
     }
 }

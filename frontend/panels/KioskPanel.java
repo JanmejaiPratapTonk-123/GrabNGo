@@ -2,6 +2,7 @@ package frontend.panels;
 
 import backend.controllers.KioskController;
 import frontend.MainFrame;
+import frontend.dialogs.OrderHistoryDialog;
 import frontend.ui.FoodIconPainter;
 import frontend.ui.AppTheme;
 
@@ -96,7 +97,23 @@ public class KioskPanel extends JPanel {
         left.add(brandLabel);
         nav.add(left, BorderLayout.WEST);
 
-        // Right: back to home
+        // Right: Order History + Back to Home
+        JPanel right = new JPanel(new FlowLayout(FlowLayout.RIGHT, 12, 14));
+        right.setOpaque(false);
+
+        // Order History button
+        JButton historyBtn = new JButton("📋 Order History");
+        historyBtn.setFont(AppTheme.getFontBold(13));
+        historyBtn.setForeground(AppTheme.MC_YELLOW);
+        historyBtn.setContentAreaFilled(false);
+        historyBtn.setBorderPainted(false);
+        historyBtn.setFocusPainted(false);
+        historyBtn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        historyBtn.addActionListener(e -> {
+            new OrderHistoryDialog(mainFrame, controller);
+        });
+
+        // Back to Home button
         JButton homeBtn = new JButton("← Back to Home");
         homeBtn.setFont(AppTheme.getFontPlain(13));
         homeBtn.setForeground(new Color(255, 220, 220));
@@ -110,11 +127,11 @@ public class KioskPanel extends JPanel {
             mainFrame.showSplash();
         });
 
-        JPanel right = new JPanel(new FlowLayout(FlowLayout.RIGHT, 0, 14));
-        right.setOpaque(false);
+        right.add(historyBtn);
         right.add(homeBtn);
         nav.add(right, BorderLayout.EAST);
 
         return nav;
     }
 }
+
