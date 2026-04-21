@@ -21,6 +21,6 @@ if %ERRORLEVEL% neq 0 (
 
 echo.
 echo [OK] Build successful. Launching GrabNGo...
-java -cp bin App
+java -cp bin frontend.App
 
 endlocal

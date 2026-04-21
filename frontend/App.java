@@ -1,7 +1,7 @@
-
+package frontend;
 
 import backend.controllers.KioskController;
-import frontend.MainFrame;
+
 
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;

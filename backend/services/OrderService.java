@@ -10,7 +10,8 @@ import java.util.Collection;
  */
 public class OrderService {
 
-    private int tokenCounter = 100;
+    // Start from last 4 digits of epoch seconds so tokens never repeat across sessions
+    private int tokenCounter = (int) (System.currentTimeMillis() / 1000 % 9000) + 1000;
 
     /**
      * Creates a new order from the current cart contents.
