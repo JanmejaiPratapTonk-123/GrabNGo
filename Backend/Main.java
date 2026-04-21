@@ -7,56 +7,56 @@ public class Main
 {
     public static void main(String[] args) 
     {
-        Scanner sc = new Scanner(System.in);
+        Scanner input = new Scanner(System.in);
 
         CanteenSystem system = new CanteenSystem();
         OrderService orderService = new OrderService();
         SalesService sales = new SalesService();
         HistoryService history = new HistoryService();
 
-        while (true) 
+        while(true) 
         {
             System.out.println("\n1 Place Order  2 Serve  3 Queue  4 Sales  5 History  6 Exit");
-            int ch = sc.nextInt();
-            sc.nextLine();
+            int ch = input.nextInt();
+            input.nextLine();
 
-            if (ch == 1) {
+            if(ch == 1) 
+            {
                 System.out.print("Enter Name: ");
-                String name = sc.nextLine();
+                String name = input.nextLine();
 
                 Order order = orderService.createOrder(name);
 
-                while (true) {
+                while(true) 
+                {
                     system.showMenu();
                     System.out.println("1 Add  2 Remove  3 View Cart  4 Checkout");
 
-                    int op = sc.nextInt();
+                    int op = input.nextInt();
 
-                    if (op == 1) {
-                        int id = sc.nextInt();
+                    if(op == 1) 
+                    {
+                        int id = input.nextInt();
                         FoodItem item = system.getItem(id);
-                        if (item != null)
+                        if(item != null)
                             order.addItem(item);
                     }
-                    else if (op == 2) {
+                    else if(op == 2)
                         order.removeLastItem();
-                    }
-                    else if (op == 3) {
+                    else if(op == 3)
                         order.showCart();
-                    }
-                    else {
+                    else 
                         break;
-                    }
                 }
 
                 System.out.println("Payment: 1 Cash  2 UPI");
-                int pay = sc.nextInt();
+                int pay = input.nextInt();
                 String paymentMode = PaymentService.process(pay);
                 order.setPaymentMode(paymentMode);
-                if (paymentMode.equals("UPI")) {
+                if(paymentMode.equals("UPI"))
                     System.out.println("Please scan the QR code to complete payment.");
-                }
-                try {
+                try 
+                {
                     FileWriter fw = new FileWriter("orders.txt", true);
                     fw.write("--- ORDER ---\n");
                     fw.write("Token: " + order.getToken() + "\n");
