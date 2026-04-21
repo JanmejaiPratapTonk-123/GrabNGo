@@ -6,7 +6,7 @@ if exist bin rmdir /s /q bin
 mkdir bin
 
 dir /s /B backend\*.java frontend\*.java > sources.txt
-javac -d bin @sources.txt
+javac -encoding UTF-8 -d bin @sources.txt
 del sources.txt
 
 :: Run if success
