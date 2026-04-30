@@ -41,6 +41,7 @@ public class CartPanel extends JPanel {
     private final JPanel cartItemsPanel;
     private final JLabel totalLabel;
     private final JButton checkoutButton;
+    private static final int BTN = 24;
 
     public CartPanel(MainFrame mainFrame, KioskController controller) {
         this.mainFrame = mainFrame;
@@ -175,7 +176,7 @@ public class CartPanel extends JPanel {
         JPanel qty = new JPanel(new GridLayout(1, 3, 3, 0));
         qty.setOpaque(false);
 
-        JButton minus = buildQtyBtn("−", BTN);
+        JButton minus = buildQtyBtn("-", BTN);
         minus.addActionListener(e -> {
             controller.removeFromCart(ci.getMenuItem().getName());
             refreshCart();
