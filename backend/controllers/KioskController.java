@@ -15,10 +15,6 @@ import backend.services.SalesService;
 import java.util.Collection;
 import java.util.List;
 
-/**
- * The single point of entry for the frontend to interact with the backend.
- * Orchestrates calls to the underlying services and DAOs.
- */
 public class KioskController {
 
     private final MenuService menuService;
@@ -39,7 +35,6 @@ public class KioskController {
         this.historyService = new HistoryService();
     }
 
-    // --- Menu Operations ---
 
     public List<MenuItem> getMenu(String category) {
         return menuService.getByCategory(category);
@@ -49,7 +44,6 @@ public class KioskController {
         return menuService.getItemById(id);
     }
 
-    // --- Cart Operations ---
 
     public void addToCart(MenuItem item) {
         cartService.addItem(item);
@@ -75,15 +69,7 @@ public class KioskController {
         cartService.clearCart();
     }
 
-    // --- Order & Checkout Operations ---
 
-    /**
-     * Completes the checkout process.
-     * Validates payment, creates order, persists to file, tracks sales/history, and clears cart.
-     *
-     * @param paymentMethod "Cash" or "UPI"
-     * @return The completed Order object
-     */
     public Order checkout(String paymentMethod) {
         paymentService.validateMethod(paymentMethod);
 
@@ -105,7 +91,6 @@ public class KioskController {
         return order;
     }
 
-    // --- Admin/Reporting Operations ---
 
     public double getTotalSales() {
         return salesService.getTotalSales();
@@ -115,10 +100,6 @@ public class KioskController {
         return historyService.getHistory();
     }
 
-    /**
-     * Loads complete order history from the persistent orders.txt file.
-     * Returns newest-first.
-     */
     public List<OrderRecord> loadOrderHistory() {
         return orderDAO.loadOrders();
     }

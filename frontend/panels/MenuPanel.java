@@ -32,9 +32,6 @@ import javax.swing.JScrollPane;
 import javax.swing.border.AbstractBorder;
 import javax.swing.border.EmptyBorder;
 
-/**
- * Displays the menu items and category filters.
- */
 public class MenuPanel extends JPanel {
 
     private final KioskController controller;

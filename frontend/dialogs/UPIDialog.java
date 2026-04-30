@@ -20,9 +20,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-/**
- * Dialog prompting the user to scan a QR code for UPI payment.
- */
 public class UPIDialog extends JDialog {
 
     public UPIDialog(MainFrame mainFrame, KioskController controller) {

@@ -1,10 +1,10 @@
-# ── Compiled output (NEVER commit these) ──────────────────────────────────────
+# ── Compiled output (NEVER commit these) ──
 out/
 bin/
 build/
 *.class
 
-# ── IDE / editor project files ────────────────────────────────────────────────
+# ── IDE / editor project files ──
 .vscode/
 .idea/
 *.iml
@@ -14,10 +14,10 @@ build/
 .classpath
 .settings/
 
-# ── OS-generated files ────────────────────────────────────────────────────────
+# ── OS-generated files ──
 .DS_Store
 Thumbs.db
 
-# ── Runtime artifacts ─────────────────────────────────────────────────────────
+# ── Runtime artifacts ──
 orders.txt
 sources.txt

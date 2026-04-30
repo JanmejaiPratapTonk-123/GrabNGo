@@ -20,10 +20,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-/**
- * The main container for the order interface.
- * Contains the Top Navbar, Menu Grid, and Shopping Cart.
- */
 public class KioskPanel extends JPanel {
 
     private final KioskController controller;
@@ -53,9 +49,6 @@ public class KioskPanel extends JPanel {
         add(body, BorderLayout.CENTER);
     }
 
-    /**
-     * Resets the ordering view.
-     */
     public void reset() {
         menuPanel.resetToAll();
         cartPanel.refreshCart();

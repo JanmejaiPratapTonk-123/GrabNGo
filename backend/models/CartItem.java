@@ -1,8 +1,5 @@
 package backend.models;
 
-/**
- * Represents an item in the shopping cart with its quantity.
- */
 public class CartItem {
     private final MenuItem menuItem;
     private int quantity;

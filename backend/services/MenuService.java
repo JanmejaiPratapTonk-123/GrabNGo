@@ -8,10 +8,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * Provides access to the canteen menu.
- * Centralises all menu data that was previously hardcoded in the UI.
- */
 public class MenuService {
 
     private final List<MenuItem> menu;
@@ -32,17 +28,10 @@ public class MenuService {
         menu.add(new MenuItem(12, "Water",    10,  "Drinks", new Color(220, 240, 255), "water"));
     }
 
-    /**
-     * Returns all menu items.
-     */
     public List<MenuItem> getAllItems() {
         return Collections.unmodifiableList(menu);
     }
 
-    /**
-     * Returns menu items filtered by category.
-     * If category is "All" or null, returns all items.
-     */
     public List<MenuItem> getByCategory(String category) {
         if (category == null || category.equals("All")) {
             return getAllItems();
@@ -52,9 +41,6 @@ public class MenuService {
                 .collect(Collectors.toList());
     }
 
-    /**
-     * Looks up a menu item by its ID.
-     */
     public MenuItem getItemById(int id) {
         for (MenuItem item : menu) {
             if (item.getId() == id) {

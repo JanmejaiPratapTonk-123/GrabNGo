@@ -21,9 +21,6 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-/**
- * The initial welcome screen for the application.
- */
 public class SplashPanel extends JPanel {
 
     public SplashPanel(MainFrame mainFrame) {

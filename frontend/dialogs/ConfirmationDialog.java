@@ -21,9 +21,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-/**
- * Screen showing token and confirmation of placed order.
- */
 public class ConfirmationDialog extends JDialog {
 
     public ConfirmationDialog(MainFrame mainFrame, int token, String method) {

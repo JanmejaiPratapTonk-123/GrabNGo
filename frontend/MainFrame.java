@@ -9,9 +9,6 @@ import java.awt.CardLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-/**
- * The main application window holding all screens via CardLayout.
- */
 public class MainFrame extends JFrame {
 
     private final CardLayout cardLayout = new CardLayout();
@@ -39,16 +36,10 @@ public class MainFrame extends JFrame {
         showSplash();
     }
 
-    /**
-     * Navigates to the splash screen.
-     */
     public void showSplash() {
         cardLayout.show(mainContainer, "splash");
     }
 
-    /**
-     * Navigates to the kiosk ordering screen, resetting its state.
-     */
     public void showKiosk() {
         kioskPanel.reset();
         cardLayout.show(mainContainer, "kiosk");

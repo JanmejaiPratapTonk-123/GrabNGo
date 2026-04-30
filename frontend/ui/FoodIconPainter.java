@@ -11,9 +11,6 @@ import java.awt.geom.GeneralPath;
 
 import javax.swing.JPanel;
 
-/**
- * Custom component to draw vector representations of food items.
- */
 public class FoodIconPainter extends JPanel {
     private final String key;
 

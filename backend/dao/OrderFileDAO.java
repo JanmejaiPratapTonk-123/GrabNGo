@@ -14,17 +14,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Handles persistence of Order objects to the file system.
- */
 public class OrderFileDAO {
 
     private static final String FILE_PATH = "orders.txt";
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
-    /**
-     * Appends an order to the orders.txt file.
-     */
     public void saveOrder(Order order) {
         try (FileWriter fw = new FileWriter(FILE_PATH, true)) {
             fw.write("--- ORDER ---\n");
@@ -42,10 +36,6 @@ public class OrderFileDAO {
         }
     }
 
-    /**
-     * Scans orders.txt for the highest token and returns max + 1.
-     * Returns 1 if no orders exist yet — so tokens always start from 1.
-     */
     public int getNextToken() {
         File file = new File(FILE_PATH);
         if (!file.exists() || file.length() == 0) return 1;
@@ -68,10 +58,6 @@ public class OrderFileDAO {
         return maxToken + 1;
     }
 
-    /**
-     * Reads all orders from orders.txt and returns them as OrderRecord objects.
-     * Returns newest-first. Handles missing/malformed file gracefully.
-     */
     public List<OrderRecord> loadOrders() {
         List<OrderRecord> records = new ArrayList<>();
         File file = new File(FILE_PATH);

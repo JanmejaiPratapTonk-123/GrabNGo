@@ -10,9 +10,6 @@ import java.awt.RenderingHints;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
-/**
- * Renders a mock QR code for UPI payments.
- */
 public class QRCodePanel extends JPanel {
     
     public QRCodePanel() {

@@ -33,9 +33,6 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
-/**
- * The sidebar showing the current contents of the shopping cart.
- */
 public class CartPanel extends JPanel {
 
     private final MainFrame mainFrame;

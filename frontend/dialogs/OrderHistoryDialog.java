@@ -36,10 +36,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableRowSorter;
 
-/**
- * A professional dialog displaying the full order history read from orders.txt.
- * Features: JTable, search by token, refresh, newest-first sort, empty state handling.
- */
 public class OrderHistoryDialog extends JDialog {
 
     private final KioskController controller;
@@ -205,9 +201,6 @@ public class OrderHistoryDialog extends JDialog {
         setVisible(true);
     }
 
-    /**
-     * Loads order data from the backend and populates the table.
-     */
     private void loadData() {
         tableModel.setRowCount(0);
 
@@ -231,9 +224,6 @@ public class OrderHistoryDialog extends JDialog {
         }
     }
 
-    /**
-     * Filters table rows by token number (column 0).
-     */
     private void applyFilter(String text) {
         if (text == null || text.trim().isEmpty()) {
             sorter.setRowFilter(null);
@@ -249,9 +239,6 @@ public class OrderHistoryDialog extends JDialog {
         }
     }
 
-    /**
-     * Custom renderer for alternating row backgrounds + status color coding.
-     */
     private static class AlternatingRowRenderer extends DefaultTableCellRenderer {
         private static final Color EVEN_ROW = AppTheme.MC_WHITE;
         private static final Color ODD_ROW  = new Color(250, 250, 248);

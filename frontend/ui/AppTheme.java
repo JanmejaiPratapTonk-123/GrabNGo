@@ -3,9 +3,6 @@ package frontend.ui;
 import java.awt.Color;
 import java.awt.Font;
 
-/**
- * Centralised theme constants for the application.
- */
 public class AppTheme {
     public static final Color MC_RED       = new Color(219, 0, 0);
     public static final Color MC_YELLOW    = new Color(255, 188, 0);
