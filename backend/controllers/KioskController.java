@@ -33,7 +33,7 @@ public class KioskController {
         this.menuService = new MenuService();
         this.cartService = new CartService();
         this.orderDAO = new OrderFileDAO();
-        this.orderService = new OrderService(orderDAO.getNextToken()); // continues from last saved token
+        this.orderService = new OrderService(orderDAO.getNextToken());
         this.paymentService = new PaymentService();
         this.salesService = new SalesService();
         this.historyService = new HistoryService();
@@ -85,28 +85,21 @@ public class KioskController {
      * @return The completed Order object
      */
     public Order checkout(String paymentMethod) {
-        // Validate payment
         paymentService.validateMethod(paymentMethod);
 
-        // Get cart details before clearing
         Collection<CartItem> items = cartService.getCartItems();
         double total = cartService.getTotal();
 
-        // Create order
         Order order = orderService.createOrder(items, total, paymentMethod);
         
-        // Process payment
         paymentService.processPayment(paymentMethod, total);
         order.setStatus("Completed");
 
-        // Record metrics
         salesService.addSale(total);
         historyService.addOrder(order);
 
-        // Save to file
         orderDAO.saveOrder(order);
 
-        // Clear cart for next customer
         cartService.clearCart();
 
         return order;

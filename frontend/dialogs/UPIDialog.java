@@ -76,7 +76,6 @@ public class UPIDialog extends JDialog {
         doneBtn.addActionListener(e -> {
             dispose();
             try {
-                // Controller handles placing order and clearing cart
                 var order = controller.checkout("UPI");
                 new ConfirmationDialog(mainFrame, order.getToken(), "UPI");
             } catch (Exception ex) {

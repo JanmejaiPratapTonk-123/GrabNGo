@@ -38,15 +38,12 @@ public class KioskPanel extends JPanel {
         setLayout(new BorderLayout());
         setBackground(AppTheme.MC_GRAY);
 
-        // Top navbar
         add(buildNavbar(), BorderLayout.NORTH);
 
-        // Body area
         JPanel body = new JPanel(new BorderLayout(0, 0));
         body.setBackground(AppTheme.MC_GRAY);
         body.setBorder(new EmptyBorder(14, 14, 14, 14));
 
-        // Create Cart Panel first so we can pass its reference to the Menu Panel
         cartPanel = new CartPanel(mainFrame, controller);
         menuPanel = new MenuPanel(controller, cartPanel::refreshCart);
 
@@ -70,7 +67,6 @@ public class KioskPanel extends JPanel {
         nav.setBorder(new EmptyBorder(0, 20, 0, 20));
         nav.setPreferredSize(new Dimension(0, 62));
 
-        // Left: logo + name
         JPanel left = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0));
         left.setOpaque(false);
 
@@ -97,11 +93,9 @@ public class KioskPanel extends JPanel {
         left.add(brandLabel);
         nav.add(left, BorderLayout.WEST);
 
-        // Right: Order History + Back to Home
         JPanel right = new JPanel(new FlowLayout(FlowLayout.RIGHT, 12, 14));
         right.setOpaque(false);
 
-        // Order History button
         JButton historyBtn = new JButton("📋 Order History");
         historyBtn.setFont(AppTheme.getFontBold(13));
         historyBtn.setForeground(AppTheme.MC_YELLOW);
@@ -113,7 +107,6 @@ public class KioskPanel extends JPanel {
             new OrderHistoryDialog(mainFrame, controller);
         });
 
-        // Back to Home button
         JButton homeBtn = new JButton("← Back to Home");
         homeBtn.setFont(AppTheme.getFontPlain(13));
         homeBtn.setForeground(new Color(255, 220, 220));

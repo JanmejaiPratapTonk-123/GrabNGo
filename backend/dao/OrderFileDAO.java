@@ -137,7 +137,7 @@ public class OrderFileDAO {
             System.err.println("Error reading order history: " + e.getMessage());
         }
 
-        Collections.reverse(records); // Newest first
+        Collections.reverse(records);
         return records;
     }
 }

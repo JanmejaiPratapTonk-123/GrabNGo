@@ -56,7 +56,6 @@ public class PaymentDialog extends JDialog {
         totalLbl.setForeground(AppTheme.TEXT_MUTED);
         totalLbl.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        // Payment option buttons
         JPanel optRow = new JPanel(new GridLayout(1, 2, 12, 0));
         optRow.setOpaque(false);
         optRow.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -125,7 +124,6 @@ public class PaymentDialog extends JDialog {
 
     private void processCheckout(String method) {
         try {
-            // The controller handles EVERYTHING: order creation, payment validation, saving to file, clearing cart.
             var order = controller.checkout(method);
             new ConfirmationDialog(mainFrame, order.getToken(), order.getPaymentMethod());
         } catch (Exception ex) {

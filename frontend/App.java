@@ -11,7 +11,6 @@ import javax.swing.UIManager;
  */
 public class App {
     public static void main(String[] args) {
-        // Use system look and feel for a bit nicer default styling
         try { 
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName()); 
         } catch (Exception ignored) {}

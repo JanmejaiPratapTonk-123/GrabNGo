@@ -54,7 +54,6 @@ public class CartPanel extends JPanel {
         setPreferredSize(new Dimension(270, 0));
         setBorder(new EmptyBorder(14, 14, 14, 14));
 
-        // Header
         JPanel cartHeader = new JPanel(new BorderLayout());
         cartHeader.setOpaque(false);
         JLabel title = new JLabel("Your Order");
@@ -66,7 +65,6 @@ public class CartPanel extends JPanel {
         cartHeader.add(title, BorderLayout.CENTER);
         add(cartHeader, BorderLayout.NORTH);
 
-        // Items View
         cartItemsPanel = new JPanel();
         cartItemsPanel.setLayout(new BoxLayout(cartItemsPanel, BoxLayout.Y_AXIS));
         cartItemsPanel.setOpaque(false);
@@ -77,7 +75,6 @@ public class CartPanel extends JPanel {
         scroll.getViewport().setOpaque(false);
         add(scroll, BorderLayout.CENTER);
 
-        // Footer
         JPanel footer = new JPanel();
         footer.setLayout(new BoxLayout(footer, BoxLayout.Y_AXIS));
         footer.setOpaque(false);
@@ -159,7 +156,6 @@ public class CartPanel extends JPanel {
     }
 
     private JPanel buildCartRow(CartItem ci) {
-        // Use GridBagLayout so name / qty / price all share the same row height
         JPanel row = new JPanel(new GridBagLayout());
         row.setOpaque(false);
         row.setMaximumSize(new Dimension(Integer.MAX_VALUE, 36));
@@ -171,7 +167,6 @@ public class CartPanel extends JPanel {
         gbc.gridy  = 0;
         gbc.insets = new Insets(0, 0, 0, 0);
 
-        // ── Item name (left, takes remaining space) ────────────────────────────
         JLabel name = new JLabel(ci.getMenuItem().getName());
         name.setFont(AppTheme.getFontPlain(13));
         name.setForeground(AppTheme.TEXT_DARK);
@@ -180,8 +175,6 @@ public class CartPanel extends JPanel {
         gbc.fill = GridBagConstraints.BOTH;
         row.add(name, gbc);
 
-        // ── Quantity strip: [−] [n] [+] in a fixed 3-column GridLayout ─────────
-        final int BTN = 26; // px — button & label share the same square size
         JPanel qty = new JPanel(new GridLayout(1, 3, 3, 0));
         qty.setOpaque(false);
 
@@ -210,7 +203,6 @@ public class CartPanel extends JPanel {
         qty.add(num);
         qty.add(plus);
 
-        // Fixed width for the qty strip so it never stretches
         int stripW = BTN * 3 + 3 * 2;
         qty.setPreferredSize(new Dimension(stripW, BTN));
         qty.setMinimumSize(new Dimension(stripW, BTN));
@@ -222,7 +214,6 @@ public class CartPanel extends JPanel {
         gbc.insets  = new Insets(0, 4, 0, 4);
         row.add(qty, gbc);
 
-        // ── Subtotal price (right) ─────────────────────────────────────────────
         JLabel price = new JLabel("₹" + (int) ci.getSubtotal());
         price.setFont(AppTheme.getFontPlain(13));
         price.setForeground(AppTheme.TEXT_MUTED);
@@ -236,11 +227,9 @@ public class CartPanel extends JPanel {
 
     private JButton buildQtyBtn(String text, int size) {
         JButton b = new JButton(text);
-        // Explicitly set a balanced font — avoid emoji/special baseline shifts
         b.setFont(new Font(AppTheme.FONT_FAMILY, Font.BOLD, 13));
         b.setHorizontalAlignment(SwingConstants.CENTER);
         b.setVerticalAlignment(SwingConstants.CENTER);
-        // Zero out ALL button padding so the text truly centers in the square
         b.setMargin(new Insets(0, 0, 0, 0));
         b.setPreferredSize(new Dimension(size, size));
         b.setMinimumSize(new Dimension(size, size));
