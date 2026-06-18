@@ -40,7 +40,7 @@ public class UPIDialog extends JDialog {
         title.setForeground(AppTheme.TEXT_DARK);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JLabel amt = new JLabel("₹" + (int) controller.getCartTotal());
+        JLabel amt = new JLabel("\u20B9" + (int) controller.getCartTotal());
         amt.setFont(AppTheme.getFontBold(28));
         amt.setForeground(AppTheme.MC_RED);
         amt.setAlignmentX(Component.CENTER_ALIGNMENT);

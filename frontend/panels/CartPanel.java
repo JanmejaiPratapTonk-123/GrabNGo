@@ -146,7 +146,7 @@ public class CartPanel extends JPanel {
             }
         }
         
-        totalLabel.setText("₹" + (int) controller.getCartTotal());
+        totalLabel.setText("\u20B9" + (int) controller.getCartTotal());
         checkoutButton.setEnabled(!controller.isCartEmpty());
         
         cartItemsPanel.revalidate();
@@ -212,12 +212,8 @@ public class CartPanel extends JPanel {
         gbc.insets  = new Insets(0, 4, 0, 4);
         row.add(qty, gbc);
 
-<<<<<<< HEAD
-        // ── Subtotal price (right) ─────────────────────────────────────────────
-        JLabel price = new JLabel("\u20B9" + (int) ci.getSubtotal());
-=======
-        JLabel price = new JLabel("₹" + (int) ci.getSubtotal());
->>>>>>> 846cf31e33ece36245e98bb8a3544b98b9ef97a8
+    // ── Subtotal price (right) ─────────────────────────────────────────────
+    JLabel price = new JLabel("\u20B9" + (int) ci.getSubtotal());
         price.setFont(AppTheme.getFontPlain(13));
         price.setForeground(AppTheme.TEXT_MUTED);
         price.setHorizontalAlignment(SwingConstants.RIGHT);

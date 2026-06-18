@@ -48,7 +48,7 @@ public class PaymentDialog extends JDialog {
         heading.setForeground(AppTheme.TEXT_DARK);
         heading.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        JLabel totalLbl = new JLabel("Total: ₹" + (int) controller.getCartTotal());
+        JLabel totalLbl = new JLabel("Total: \u20B9" + (int) controller.getCartTotal());
         totalLbl.setFont(AppTheme.getFontPlain(14));
         totalLbl.setForeground(AppTheme.TEXT_MUTED);
         totalLbl.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -58,8 +58,8 @@ public class PaymentDialog extends JDialog {
         optRow.setAlignmentX(Component.LEFT_ALIGNMENT);
         optRow.setMaximumSize(new Dimension(Integer.MAX_VALUE, 60));
 
-        JButton cashBtn = buildPayOptionBtn("💵  Cash");
-        JButton upiBtn  = buildPayOptionBtn("📱  UPI");
+        JButton cashBtn = buildPayOptionBtn("\uD83D\uDCB5  Cash");
+        JButton upiBtn  = buildPayOptionBtn("\uD83D\uDCF1  UPI");
 
         cashBtn.addActionListener(e -> {
             upiSelected = false;

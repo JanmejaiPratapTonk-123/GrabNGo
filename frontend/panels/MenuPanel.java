@@ -198,7 +198,7 @@ public class MenuPanel extends JPanel {
         nameLabel.setFont(AppTheme.getFontBold(14));
         nameLabel.setForeground(AppTheme.TEXT_DARK);
 
-        JLabel priceLabel = new JLabel("₹" + (int) item.getPrice());
+        JLabel priceLabel = new JLabel("\u20B9" + (int) item.getPrice());
         priceLabel.setFont(AppTheme.getFontPlain(13));
         priceLabel.setForeground(AppTheme.TEXT_MUTED);
 
