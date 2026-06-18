@@ -102,7 +102,7 @@ public class KioskPanel extends JPanel {
         right.setOpaque(false);
 
         // Order History button
-        JButton historyBtn = new JButton("📋 Order History");
+        JButton historyBtn = new JButton("Order History");
         historyBtn.setFont(AppTheme.getFontBold(13));
         historyBtn.setForeground(AppTheme.MC_YELLOW);
         historyBtn.setContentAreaFilled(false);
@@ -114,7 +114,7 @@ public class KioskPanel extends JPanel {
         });
 
         // Back to Home button
-        JButton homeBtn = new JButton("← Back to Home");
+        JButton homeBtn = new JButton("< Back to Home");
         homeBtn.setFont(AppTheme.getFontPlain(13));
         homeBtn.setForeground(new Color(255, 220, 220));
         homeBtn.setContentAreaFilled(false);

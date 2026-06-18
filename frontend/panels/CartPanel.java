@@ -60,7 +60,7 @@ public class CartPanel extends JPanel {
         JLabel title = new JLabel("Your Order");
         title.setFont(AppTheme.getFontBold(17));
         title.setForeground(AppTheme.TEXT_DARK);
-        JLabel bagIcon = new JLabel("🛍");
+        JLabel bagIcon = new JLabel("Bag");
         bagIcon.setFont(AppTheme.getFontPlain(18));
         cartHeader.add(bagIcon, BorderLayout.WEST);
         cartHeader.add(title, BorderLayout.CENTER);
@@ -94,7 +94,7 @@ public class CartPanel extends JPanel {
         totalTxt.setFont(AppTheme.getFontPlain(13));
         totalTxt.setForeground(AppTheme.TEXT_MUTED);
         
-        totalLabel = new JLabel("₹0");
+        totalLabel = new JLabel("\u20B90");
         totalLabel.setFont(AppTheme.getFontBold(22));
         totalLabel.setForeground(AppTheme.TEXT_DARK);
         
@@ -185,7 +185,7 @@ public class CartPanel extends JPanel {
         JPanel qty = new JPanel(new GridLayout(1, 3, 3, 0));
         qty.setOpaque(false);
 
-        JButton minus = buildQtyBtn("−", BTN);
+        JButton minus = buildQtyBtn("-", BTN);
         minus.addActionListener(e -> {
             controller.removeFromCart(ci.getMenuItem().getName());
             refreshCart();
@@ -223,7 +223,7 @@ public class CartPanel extends JPanel {
         row.add(qty, gbc);
 
         // ── Subtotal price (right) ─────────────────────────────────────────────
-        JLabel price = new JLabel("₹" + (int) ci.getSubtotal());
+        JLabel price = new JLabel("\u20B9" + (int) ci.getSubtotal());
         price.setFont(AppTheme.getFontPlain(13));
         price.setForeground(AppTheme.TEXT_MUTED);
         price.setHorizontalAlignment(SwingConstants.RIGHT);
