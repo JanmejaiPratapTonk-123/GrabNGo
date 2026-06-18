@@ -32,9 +32,6 @@ import javax.swing.JScrollPane;
 import javax.swing.border.AbstractBorder;
 import javax.swing.border.EmptyBorder;
 
-/**
- * Displays the menu items and category filters.
- */
 public class MenuPanel extends JPanel {
 
     private final KioskController controller;
@@ -54,13 +51,11 @@ public class MenuPanel extends JPanel {
         setBackground(AppTheme.MC_GRAY);
         setBorder(new EmptyBorder(0, 0, 0, 14));
 
-        // Category tab bar
         tabBar = new JPanel(new FlowLayout(FlowLayout.LEFT, 8, 0));
         tabBar.setBackground(AppTheme.MC_GRAY);
         buildTabs();
         add(tabBar, BorderLayout.NORTH);
 
-        // Menu Grid
         grid = new JPanel(new GridLayout(0, 3, 12, 12));
         grid.setBackground(AppTheme.MC_GRAY);
         grid.setBorder(new EmptyBorder(8, 0, 0, 0));
@@ -136,7 +131,6 @@ public class MenuPanel extends JPanel {
             currentCategory = cat;
             loadMenu();
             
-            // Repaint all tabs
             for (Component c : tabBar.getComponents()) {
                 if (c instanceof JButton) {
                     ((JButton) c).setForeground(((JButton) c).getText().equals(currentCategory) ? AppTheme.MC_WHITE : AppTheme.TEXT_MUTED);
@@ -177,7 +171,6 @@ public class MenuPanel extends JPanel {
             new EmptyBorder(0, 0, 0, 0)
         ));
 
-        // Food image background
         JPanel imageArea = new JPanel(new BorderLayout()) {
             @Override
             protected void paintComponent(Graphics g) {
@@ -196,7 +189,6 @@ public class MenuPanel extends JPanel {
         imageArea.add(icon, BorderLayout.CENTER);
         card.add(imageArea, BorderLayout.NORTH);
 
-        // Info area (name, price, button)
         JPanel info = new JPanel();
         info.setOpaque(false);
         info.setLayout(new BoxLayout(info, BoxLayout.Y_AXIS));
@@ -239,7 +231,6 @@ public class MenuPanel extends JPanel {
 
         card.add(info, BorderLayout.CENTER);
 
-        // Clicking anywhere on the card adds to cart
         card.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {

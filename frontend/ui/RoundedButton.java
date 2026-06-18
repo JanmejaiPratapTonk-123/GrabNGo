@@ -8,9 +8,6 @@ import java.awt.RenderingHints;
 
 import javax.swing.JButton;
 
-/**
- * Reusable rounded button component to replace all anonymous JButton subclasses.
- */
 public class RoundedButton extends JButton {
 
     private Color normalColor;

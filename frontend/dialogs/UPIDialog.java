@@ -20,9 +20,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-/**
- * Dialog prompting the user to scan a QR code for UPI payment.
- */
 public class UPIDialog extends JDialog {
 
     public UPIDialog(MainFrame mainFrame, KioskController controller) {
@@ -76,7 +73,6 @@ public class UPIDialog extends JDialog {
         doneBtn.addActionListener(e -> {
             dispose();
             try {
-                // Controller handles placing order and clearing cart
                 var order = controller.checkout("UPI");
                 new ConfirmationDialog(mainFrame, order.getToken(), "UPI");
             } catch (Exception ex) {

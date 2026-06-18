@@ -36,10 +36,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableRowSorter;
 
-/**
- * A professional dialog displaying the full order history read from orders.txt.
- * Features: JTable, search by token, refresh, newest-first sort, empty state handling.
- */
 public class OrderHistoryDialog extends JDialog {
 
     private final KioskController controller;
@@ -61,11 +57,9 @@ public class OrderHistoryDialog extends JDialog {
         setResizable(true);
         setMinimumSize(new Dimension(600, 400));
 
-        // Main container
         JPanel root = new JPanel(new BorderLayout(0, 0));
         root.setBackground(AppTheme.MC_WHITE);
 
-        // ── Header (red title bar only) ───────────────────────────────────────────
         JPanel header = new JPanel(new BorderLayout());
         header.setBackground(AppTheme.MC_RED);
         header.setBorder(new EmptyBorder(14, 20, 14, 20));
@@ -75,7 +69,6 @@ public class OrderHistoryDialog extends JDialog {
         title.setForeground(AppTheme.MC_WHITE);
         header.add(title, BorderLayout.WEST);
 
-        // ── Search toolbar (clean white row below header) ─────────────────────────
         JPanel toolbar = new JPanel(new BorderLayout(0, 0));
         toolbar.setBackground(AppTheme.MC_WHITE);
         toolbar.setBorder(BorderFactory.createCompoundBorder(
@@ -96,7 +89,6 @@ public class OrderHistoryDialog extends JDialog {
             new EmptyBorder(5, 10, 5, 10)
         ));
 
-        // Live search filtering
         searchField.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
             @Override public void insertUpdate(javax.swing.event.DocumentEvent e) { applyFilter(searchField.getText()); }
             @Override public void removeUpdate(javax.swing.event.DocumentEvent e) { applyFilter(searchField.getText()); }
@@ -109,22 +101,19 @@ public class OrderHistoryDialog extends JDialog {
         searchRow.add(searchField);
         toolbar.add(searchRow, BorderLayout.WEST);
 
-        // Stack header + toolbar into NORTH
         JPanel north = new JPanel(new BorderLayout());
         north.add(header, BorderLayout.NORTH);
         north.add(toolbar, BorderLayout.SOUTH);
         root.add(north, BorderLayout.NORTH);
 
-        // ── Table ────────────────────────────────────────────────────────────────
         tableModel = new DefaultTableModel(COLUMNS, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
-                return false; // Read-only
+                return false;
             }
 
             @Override
             public Class<?> getColumnClass(int columnIndex) {
-                // Token, Qty, Total are numeric — enables proper sorting
                 if (columnIndex == 0 || columnIndex == 3 || columnIndex == 4) return Integer.class;
                 return String.class;
             }
@@ -140,20 +129,17 @@ public class OrderHistoryDialog extends JDialog {
         table.setFillsViewportHeight(true);
         table.setBackground(AppTheme.MC_WHITE);
 
-        // Alternating row colors
         table.setDefaultRenderer(Object.class, new AlternatingRowRenderer());
         table.setDefaultRenderer(Integer.class, new AlternatingRowRenderer());
 
-        // Column widths
-        table.getColumnModel().getColumn(0).setPreferredWidth(60);   // Token
-        table.getColumnModel().getColumn(1).setPreferredWidth(140);  // Date
-        table.getColumnModel().getColumn(2).setPreferredWidth(240);  // Items
-        table.getColumnModel().getColumn(3).setPreferredWidth(40);   // Qty
-        table.getColumnModel().getColumn(4).setPreferredWidth(70);   // Total
-        table.getColumnModel().getColumn(5).setPreferredWidth(70);   // Payment
-        table.getColumnModel().getColumn(6).setPreferredWidth(80);   // Status
+        table.getColumnModel().getColumn(0).setPreferredWidth(60);
+        table.getColumnModel().getColumn(1).setPreferredWidth(140);
+        table.getColumnModel().getColumn(2).setPreferredWidth(240);
+        table.getColumnModel().getColumn(3).setPreferredWidth(40);
+        table.getColumnModel().getColumn(4).setPreferredWidth(70);
+        table.getColumnModel().getColumn(5).setPreferredWidth(70);
+        table.getColumnModel().getColumn(6).setPreferredWidth(80);
 
-        // Styled header
         JTableHeader tableHeader = table.getTableHeader();
         tableHeader.setFont(AppTheme.getFontBold(12));
         tableHeader.setBackground(AppTheme.MC_GRAY);
@@ -161,7 +147,6 @@ public class OrderHistoryDialog extends JDialog {
         tableHeader.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, AppTheme.BORDER));
         tableHeader.setReorderingAllowed(false);
 
-        // Row sorter for search and sorting
         sorter = new TableRowSorter<>(tableModel);
         table.setRowSorter(sorter);
 
@@ -170,7 +155,6 @@ public class OrderHistoryDialog extends JDialog {
         scrollPane.getViewport().setBackground(AppTheme.MC_WHITE);
         root.add(scrollPane, BorderLayout.CENTER);
 
-        // ── Footer ───────────────────────────────────────────────────────────────
         JPanel footer = new JPanel(new BorderLayout(0, 0));
         footer.setBackground(AppTheme.MC_GRAY);
         footer.setBorder(new EmptyBorder(10, 20, 10, 20));
@@ -217,9 +201,6 @@ public class OrderHistoryDialog extends JDialog {
         setVisible(true);
     }
 
-    /**
-     * Loads order data from the backend and populates the table.
-     */
     private void loadData() {
         tableModel.setRowCount(0);
 
@@ -243,17 +224,12 @@ public class OrderHistoryDialog extends JDialog {
         }
     }
 
-    /**
-     * Filters table rows by token number (column 0).
-     */
     private void applyFilter(String text) {
         if (text == null || text.trim().isEmpty()) {
             sorter.setRowFilter(null);
         } else {
-            // Filter on the Token column (index 0) — case-insensitive partial match
             sorter.setRowFilter(RowFilter.regexFilter("(?i)" + text.trim(), 0));
         }
-        // Update status
         int visible = table.getRowCount();
         int total = tableModel.getRowCount();
         if (text != null && !text.trim().isEmpty()) {
@@ -263,9 +239,6 @@ public class OrderHistoryDialog extends JDialog {
         }
     }
 
-    /**
-     * Custom renderer for alternating row backgrounds + status color coding.
-     */
     private static class AlternatingRowRenderer extends DefaultTableCellRenderer {
         private static final Color EVEN_ROW = AppTheme.MC_WHITE;
         private static final Color ODD_ROW  = new Color(250, 250, 248);
@@ -286,7 +259,6 @@ public class OrderHistoryDialog extends JDialog {
                 c.setForeground(AppTheme.TEXT_DARK);
             }
 
-            // Color-code the Status column
             if (column == 6 && value != null) {
                 String status = value.toString();
                 if ("Completed".equalsIgnoreCase(status)) {
@@ -296,7 +268,6 @@ public class OrderHistoryDialog extends JDialog {
                 }
             }
 
-            // Right-align numeric columns
             if (column == 0 || column == 3 || column == 4) {
                 setHorizontalAlignment(SwingConstants.CENTER);
             } else {

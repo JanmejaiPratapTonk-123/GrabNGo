@@ -2,9 +2,6 @@ package backend.models;
 
 import java.awt.Color;
 
-/**
- * Represents a single food/drink item on the canteen menu.
- */
 public class MenuItem {
     private final int id;
     private final String name;

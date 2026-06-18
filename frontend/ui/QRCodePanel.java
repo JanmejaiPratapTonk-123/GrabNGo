@@ -10,9 +10,6 @@ import java.awt.RenderingHints;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
-/**
- * Renders a mock QR code for UPI payments.
- */
 public class QRCodePanel extends JPanel {
     
     public QRCodePanel() {
@@ -35,7 +32,6 @@ public class QRCodePanel extends JPanel {
         int off  = 10;
         int cell = size / 21;
 
-        // Fake QR data pattern (simplified)
         int[][] pattern = {
             {1,1,1,1,1,1,1,0,1,0,1,0,1,1,1,1,1,1,1,0,0},
             {1,0,0,0,0,0,1,0,0,1,0,1,0,1,0,0,0,0,1,1,0},
@@ -69,7 +65,6 @@ public class QRCodePanel extends JPanel {
             }
         }
 
-        // Quiet zone border
         g.setColor(Color.BLACK);
         g.setStroke(new BasicStroke(2));
         g.drawRect(off - 2, off - 2, size + 3, size + 3);

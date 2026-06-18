@@ -21,9 +21,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-/**
- * Screen showing token and confirmation of placed order.
- */
 public class ConfirmationDialog extends JDialog {
 
     public ConfirmationDialog(MainFrame mainFrame, int token, String method) {
@@ -38,7 +35,6 @@ public class ConfirmationDialog extends JDialog {
         content.setBackground(AppTheme.MC_WHITE);
         content.setBorder(new EmptyBorder(24, 24, 24, 24));
 
-        // Green checkmark circle
         JPanel check = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
@@ -94,7 +90,7 @@ public class ConfirmationDialog extends JDialog {
         
         newOrder.addActionListener(e -> {
             dispose();
-            mainFrame.showSplash(); // Returning to splash starts a new order
+            mainFrame.showSplash();
         });
 
         content.add(check);

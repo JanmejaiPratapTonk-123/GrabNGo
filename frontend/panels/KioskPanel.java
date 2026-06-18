@@ -20,10 +20,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-/**
- * The main container for the order interface.
- * Contains the Top Navbar, Menu Grid, and Shopping Cart.
- */
 public class KioskPanel extends JPanel {
 
     private final KioskController controller;
@@ -38,15 +34,12 @@ public class KioskPanel extends JPanel {
         setLayout(new BorderLayout());
         setBackground(AppTheme.MC_GRAY);
 
-        // Top navbar
         add(buildNavbar(), BorderLayout.NORTH);
 
-        // Body area
         JPanel body = new JPanel(new BorderLayout(0, 0));
         body.setBackground(AppTheme.MC_GRAY);
         body.setBorder(new EmptyBorder(14, 14, 14, 14));
 
-        // Create Cart Panel first so we can pass its reference to the Menu Panel
         cartPanel = new CartPanel(mainFrame, controller);
         menuPanel = new MenuPanel(controller, cartPanel::refreshCart);
 
@@ -56,9 +49,6 @@ public class KioskPanel extends JPanel {
         add(body, BorderLayout.CENTER);
     }
 
-    /**
-     * Resets the ordering view.
-     */
     public void reset() {
         menuPanel.resetToAll();
         cartPanel.refreshCart();
@@ -70,7 +60,6 @@ public class KioskPanel extends JPanel {
         nav.setBorder(new EmptyBorder(0, 20, 0, 20));
         nav.setPreferredSize(new Dimension(0, 62));
 
-        // Left: logo + name
         JPanel left = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0));
         left.setOpaque(false);
 
@@ -97,12 +86,15 @@ public class KioskPanel extends JPanel {
         left.add(brandLabel);
         nav.add(left, BorderLayout.WEST);
 
-        // Right: Order History + Back to Home
         JPanel right = new JPanel(new FlowLayout(FlowLayout.RIGHT, 12, 14));
         right.setOpaque(false);
 
+<<<<<<< HEAD
         // Order History button
         JButton historyBtn = new JButton("Order History");
+=======
+        JButton historyBtn = new JButton("📋 Order History");
+>>>>>>> 846cf31e33ece36245e98bb8a3544b98b9ef97a8
         historyBtn.setFont(AppTheme.getFontBold(13));
         historyBtn.setForeground(AppTheme.MC_YELLOW);
         historyBtn.setContentAreaFilled(false);
@@ -113,8 +105,12 @@ public class KioskPanel extends JPanel {
             new OrderHistoryDialog(mainFrame, controller);
         });
 
+<<<<<<< HEAD
         // Back to Home button
         JButton homeBtn = new JButton("< Back to Home");
+=======
+        JButton homeBtn = new JButton("← Back to Home");
+>>>>>>> 846cf31e33ece36245e98bb8a3544b98b9ef97a8
         homeBtn.setFont(AppTheme.getFontPlain(13));
         homeBtn.setForeground(new Color(255, 220, 220));
         homeBtn.setContentAreaFilled(false);

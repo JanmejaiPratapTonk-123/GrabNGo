@@ -1,10 +1,5 @@
 package backend.models;
 
-/**
- * A lightweight, read-only record representing a single order as parsed from orders.txt.
- * Unlike the live {@link Order} class (which holds CartItem references), this is a flat
- * data-transfer object suitable for display in a history table.
- */
 public class OrderRecord {
 
     private final int token;

@@ -6,9 +6,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Represents a completed order placed by a customer.
- */
 public class Order {
     private final int token;
     private final List<CartItem> items;
