@@ -64,7 +64,7 @@ public class OrderHistoryDialog extends JDialog {
         header.setBackground(AppTheme.MC_RED);
         header.setBorder(new EmptyBorder(14, 20, 14, 20));
 
-        JLabel title = new JLabel("📋  Order History");
+        JLabel title = new JLabel(" Order History");
         title.setFont(AppTheme.getFontBold(20));
         title.setForeground(AppTheme.MC_WHITE);
         header.add(title, BorderLayout.WEST);
@@ -168,7 +168,7 @@ public class OrderHistoryDialog extends JDialog {
         buttons.setOpaque(false);
 
         JButton refreshBtn = new RoundedButton(
-            "↻ Refresh",
+            " Refresh",
             AppTheme.MC_YELLOW,
             new Color(255, 210, 30),
             new Color(200, 160, 0),
@@ -266,6 +266,11 @@ public class OrderHistoryDialog extends JDialog {
                 } else if ("Cancelled".equalsIgnoreCase(status)) {
                     c.setForeground(AppTheme.MC_RED);
                 }
+            }
+
+            // Display rupee sign for the Total column (index 4)
+            if (column == 4 && value != null) {
+                setText("\u20B9" + value.toString());
             }
 
             if (column == 0 || column == 3 || column == 4) {
