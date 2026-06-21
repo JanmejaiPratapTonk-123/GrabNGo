@@ -1,21 +1,40 @@
 @echo off
-setlocal
+setlocal EnableDelayedExpansion
 
-:: Clean and Compile
-if exist bin rmdir /s /q bin
+echo =====================================
+echo        GrabNGo Build Script
+echo =====================================
+echo.
+
+:: Remove old build files
+if exist bin (
+echo Cleaning previous build...
+rmdir /s /q bin
+)
+
+:: Create output directory
 mkdir bin
 
-dir /s /B backend\*.java frontend\*.java > sources.txt
+echo Compiling source files...
+dir /s /b backend*.java frontend*.java > sources.txt
+
 javac -d bin @sources.txt
+set BUILD_STATUS=%ERRORLEVEL%
+
 del sources.txt
 
-:: Run if success
-if %ERRORLEVEL% == 0 (
-    echo [OK] Launching GrabNGo...
-    java -cp bin frontend.App
-) else (
-    echo [ERROR] Build failed!
-    pause
+if %BUILD_STATUS% neq 0 (
+echo.
+echo Build failed. Please check the compilation errors above.
+pause
+exit /b 1
 )
+
+echo.
+echo Build completed successfully.
+echo Starting GrabNGo...
+echo.
+
+java -cp bin frontend.App
 
 endlocal
